@@ -86,3 +86,60 @@ app.get('/mountains/:id', function(req, res) {
   }); 
 }); 
 
+
+https://www.youtube.com/watch?v=qkYWb1bC_ws
+
+3 ways to handle errors: 
+
+1) try/catch <-- doesn't work with async code
+2) callbacks <-- can become callback hell of try/catches 
+3) promises 
+
+Promises
+
+function("value", function(err, results) { ... }); 
+
+function("value").then( 
+  function(results) { ... }, 
+  function(err) { ... }
+
+----
+
+function updateDependencies(packageName) { 
+  return findPackage(packageName)
+    .then(function(content) { 
+      return JSON.parse(content); 
+    })
+    .then(function(package) { 
+      return findDependencies(package); 
+    })
+    .then(function(deps) { 
+      return processDependencies(deps);
+    }); 
+  }
+
+
+usage: 
+
+updateDependencies("npm") 
+  .then(function() { 
+    console.log("Done!"); 
+  })
+  .error(function(err) { 
+    console.error(err.stack); 
+  }); 
+  
+
+
+shortened code: 
+
+function updateDependencies(packageName) { 
+  return findPackage(packageName)
+    .then(JSON.parse)
+    .then(findDependencies)
+    .then(processDependencies);
+  }
+  
+  
+  
+  
