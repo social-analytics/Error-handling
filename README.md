@@ -141,5 +141,25 @@ function updateDependencies(packageName) {
   }
   
   
+  https://www.npmjs.com/package/request-promise
   
+  
+  // As a Request user you would write: 
+var request = require('request');
+ 
+request('http://google.com', function (err, response, body) {
+    if (err) {
+        handleError({ error: err, response: response, ... });
+    } else if (!(/^2/.test('' + response.statusCode))) { // Status Codes other than 2xx 
+        handleError({ error: body, response: response, ... });
+    } else {
+        process(body);
+    }
+});
+ 
+// As a Request-Promise user you can now write the equivalent code: 
+var rp = require('request-promise');
+ 
+rp('http://google.com')
+    .then(process, handleError);
   
